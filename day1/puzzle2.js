@@ -11,7 +11,6 @@ function solve(pairs) {
 
     for (let i = 0; i < pairs.length; i++) {
         similarityScore += pairs[i][0] * (rightListFrequency[pairs[i][0]] || 0)
-        
     }
 
     return similarityScore;
