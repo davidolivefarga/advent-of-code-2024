@@ -58,3 +58,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | Day                                 |  Stars  |
 | :---------------------------------- | :-----: |
 | [Day 1: Historian Hysteria](./day1) | ⭐️ ⭐️ |
+| [Day 2: Red-Nosed Reports](./day2)  | ⭐️ ⭐️ |
