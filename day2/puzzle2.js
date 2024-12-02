@@ -2,17 +2,23 @@ const input = require("./input");
 
 function solve(reports) {
     return reports.filter(report => {
-        const modifiedReports = [report];
+        if (isSafeReport(report)) {
+            return true;
+        }
 
         for (let i = 0; i < report.length; i++) {
-            modifiedReports.push(report.filter((_, index) => index !== i));
+            const modifiedReport = report.filter((_, index) => index !== i);
+
+            if (isSafeReport(modifiedReport)) {
+                return true;
+            }
         }
-        
-        return modifiedReports.some(isReportSafe);
+
+        return false;
     }).length;
 }
 
-function isReportSafe(report) {
+function isSafeReport(report) {
     if (report.length === 1) {
         return true;
     }

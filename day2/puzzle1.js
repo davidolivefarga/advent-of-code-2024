@@ -1,10 +1,10 @@
 const input = require("./input");
 
 function solve(reports) {
-    return reports.filter(isReportSafe).length;
+    return reports.filter(isSafeReport).length;
 }
 
-function isReportSafe(report) {
+function isSafeReport(report) {
     if (report.length === 1) {
         return true;
     }
@@ -13,14 +13,13 @@ function isReportSafe(report) {
 
     for (let i = 1; i < report.length; i++) {
         const diff = report[i] - report[i - 1];
-
-        if (firstDiff * diff < 0) {
-            return false;
-        }
-
         const absDiff = Math.abs(diff);
 
         if (absDiff < 1 || absDiff > 3) {
+            return false;
+        }
+
+        if (firstDiff * diff < 0) {
             return false;
         }
     }
