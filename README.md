@@ -42,7 +42,7 @@ There are three commands:
     npm run add-stars -- 1
     ```
 
--   `npm run solution`: runs any solution specifying the day and the puzzle.
+-   `npm run run-solution`: runs any solution specifying the day and the puzzle.
 
     Example:
 
@@ -55,5 +55,6 @@ There are three commands:
 
 Here's the list of all days, along with the stars obtained in each of them.
 
-| Day                                              |  Stars  |
-| :----------------------------------------------- | :-----: |
+| Day                                 |  Stars  |
+| :---------------------------------- | :-----: |
+| [Day 1: Historian Hysteria](./day1) | ⭐️ ⭐️ |
