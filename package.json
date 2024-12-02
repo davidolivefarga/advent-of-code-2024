@@ -7,8 +7,8 @@
         "url": "git+https://github.com/davidolivefarga/advent-of-code-2024.git"
     },
     "scripts": {
-        "run-solution": "node scripts/run-solution",
         "create-files": "node scripts/create-files",
+        "solve": "node scripts/run-solution",
         "add-stars": "node scripts/add-stars"
     },
     "devDependencies": {

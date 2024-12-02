@@ -33,6 +33,15 @@ There are three commands:
 
     _Note_: since the puzzle input depends on the user, you will need to authenticate yourself in order to fetch it. You can do so by storing your session cookie in a `.env` variable called `AOC_SESSION_COOKIE`, obtained by inspecting the network requests to the Advent of Code website.
 
+-   `npm run solve`: runs any solution specifying the day and the puzzle.
+
+    Example:
+
+    ```sh
+    # Runs the solution of Day 1 - Puzzle 2
+    npm run solution -- 1 2
+    ```
+
 -   `npm run add-stars`: adds the puzzle stars of a given day to the main README.
 
     Example:
@@ -40,15 +49,6 @@ There are three commands:
     ```sh
     # Adds the stars for Day 1
     npm run add-stars -- 1
-    ```
-
--   `npm run run-solution`: runs any solution specifying the day and the puzzle.
-
-    Example:
-
-    ```sh
-    # Runs the solution of Day 1 - Puzzle 2
-    npm run solution -- 1 2
     ```
 
 ## Solved puzzles
