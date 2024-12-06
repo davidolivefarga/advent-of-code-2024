@@ -62,3 +62,4 @@ Here's the list of all days, along with the stars obtained in each of them.
 | [Day 3: Mull It Over](./day3)       | ⭐️ ⭐️ |
 | [Day 4: Ceres Search](./day4)       | ⭐️ ⭐️ |
 | [Day 5: Print Queue](./day5)        | ⭐️ ⭐️ |
+| [Day 6: Guard Gallivant](./day6)    | ⭐️ ⭐️ |
