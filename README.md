@@ -39,7 +39,7 @@ There are three commands:
 
     ```sh
     # Runs the solution of Day 1 - Puzzle 2
-    npm run solution -- 1 2
+    npm run solve -- 1 2
     ```
 
 -   `npm run add-stars`: adds the puzzle stars of a given day to the main README.
