@@ -52,6 +52,8 @@ My solution consists on the following steps:
 
 The trickiest part is to calculate the nodes of a given pair of positions, but this is not difficult if you treat them as vectors. Suppose that one antenna is at position `p1 = (x1, y1)` and the other is at position `p2 = (x2, y2)`. If you consider the vector `v = p1 - p2 = (x1 - x2, y1 - y2)`, it represents what is needed to carry `p2` to `p1`, because `p1 = p2 + v`. This means that `a1 = p1 + v = p2 + 2 * v` will be twice as far from `p2` than from `p1`, so we have one antinode. Similarly, since `p2 = p1 - v`, `a2 = p2 - v = p1 - 2 * v` will be twice as far from `p1` than from `p2`, so we have the other antinode.
 
+**Note:** in theory, given two positions, we would actually have 4 antinodes. Besides `a1 = p1 + v` and `a2 = p2 - v`, we also have `a3 = p2 + 1/3 * v` and `a4 = p2 + 2/3 * v`, as these also satisfy the condition of "being perfectly in line with two antennas of the same frequency but with one of the antennas twice as far as the other". It's true that these interior antinodes won't always fit perfectly in the grid, in the sense that that their coordinates might not be integers... But even then, the input is guaranteed to not have interior antinodes, so no need to take them into account for the solution.
+
 ```js
 const EMPTY_TILE = ".";
 
@@ -138,6 +140,8 @@ Once we calculate `nv`, we can obtain all antinodes as follows:
 -   `p1`
 -   `p1 + nv`, `p1 + 2 * nv`, `p1 + 3 * nv` and so on until we reach the bounds of the map
 -   `p1 - nv`, `p1 - 2 * nv`, `p1 - 3 * nv` and so on until we reach the bounds of the map
+
+**Note:** I learned, after submitting the solution, that the input is carefully crafted in such a way that if `v = (x, y)`, then `gcd(x, y) = 1`... So again, we won't have interior antinodes and we could simply the solution by skipping the whole normalization part. However, given that I took the effort to do it, I decided to leave it there, to make the solution more generic.
 
 ```js
 const EMPTY_TILE = ".";
