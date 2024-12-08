@@ -141,7 +141,7 @@ Once we calculate `nv`, we can obtain all antinodes as follows:
 -   `p1 + nv`, `p1 + 2 * nv`, `p1 + 3 * nv` and so on until we reach the bounds of the map
 -   `p1 - nv`, `p1 - 2 * nv`, `p1 - 3 * nv` and so on until we reach the bounds of the map
 
-**Note:** I learned, after submitting the solution, that the input is carefully crafted in such a way that if `v = (x, y)`, then `gcd(x, y) = 1`... So again, we won't have interior antinodes and we could simply the solution by skipping the whole normalization part. However, given that I took the effort to do it, I decided to leave it there, to make the solution more generic.
+**Note:** I learned, after submitting the solution, that the input is carefully crafted in such a way that if `v = (x, y)`, then `gcd(x, y) = 1`... So again, we won't have interior antinodes and we could simplify the solution by skipping the whole normalization part. However, given that I took the effort to do it, I decided to leave it there and have a more general solution.
 
 ```js
 const EMPTY_TILE = ".";
