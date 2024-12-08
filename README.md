@@ -55,12 +55,13 @@ There are three commands:
 
 Here's the list of all days, along with the stars obtained in each of them.
 
-| Day                                 |  Stars  |
-| :---------------------------------- | :-----: |
-| [Day 1: Historian Hysteria](./day1) | ⭐️ ⭐️ |
-| [Day 2: Red-Nosed Reports](./day2)  | ⭐️ ⭐️ |
-| [Day 3: Mull It Over](./day3)       | ⭐️ ⭐️ |
-| [Day 4: Ceres Search](./day4)       | ⭐️ ⭐️ |
-| [Day 5: Print Queue](./day5)        | ⭐️ ⭐️ |
-| [Day 6: Guard Gallivant](./day6)    | ⭐️ ⭐️ |
-| [Day 7: Bridge Repair](./day7)      | ⭐️ ⭐️ |
+| Day                                    |  Stars  |
+| :------------------------------------- | :-----: |
+| [Day 1: Historian Hysteria](./day1)    | ⭐️ ⭐️ |
+| [Day 2: Red-Nosed Reports](./day2)     | ⭐️ ⭐️ |
+| [Day 3: Mull It Over](./day3)          | ⭐️ ⭐️ |
+| [Day 4: Ceres Search](./day4)          | ⭐️ ⭐️ |
+| [Day 5: Print Queue](./day5)           | ⭐️ ⭐️ |
+| [Day 6: Guard Gallivant](./day6)       | ⭐️ ⭐️ |
+| [Day 7: Bridge Repair](./day7)         | ⭐️ ⭐️ |
+| [Day 8: Resonant Collinearity](./day8) | ⭐️ ⭐️ |
