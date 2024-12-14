@@ -34,7 +34,7 @@ The key to this solution is to keep three position pointers:
 -   One that starts at the right-most position on the disk map, `rightDiskPos`, and will be used to keep track of the rightmost file position.
 -   One that starts at 0, `blockPos`, and will be used to keep track of the current block position.
 
-We also use the disk map form the puzzle input, `disk` to know the size of each file and each empty space. As we will see now, it can be modified to keep track of the remaining blocks of each file.
+We also use the disk map form the puzzle input, `disk`, to know the size of each file and each empty space. As we will see now, it can be modified to keep track of the remaining blocks of each file.
 
 As we advance through the disk map with `leftDiskPos`, there are two possibilities:
 
@@ -94,50 +94,60 @@ Same as before, but this time instead of moving file blocks one by one, we want 
 
 ### Solution
 
-TODO: My solution is very ugly because I also didn't want to use the naive approach in this puzzle. Will try to clean it up later and provide an explanation.
+After spending quite some time on the solution, I finally managed to achieve in `O(n)`.
+
+The core idea is the same as before: we advance through the disk and process files and spaces from left-to-right.
+
+We can have these scenarios:
+
+-   We encounter a file:
+    -   If it hasn't been moved yet, then we update the checksum and advance the block position same way we did in the first puzzle.
+    -   If it been already moved, then it means we have to treat it as if we had encountered an empty space, see steps below.
+-   We encounter an empty space:
+    -   If we can find a file to place in that empty space, we use its ID to update the checksum and advance the block position accordingly. However, here comes the tricky part... How to find that file? The naive solution would be to scan the disk from right-to-left until we find a file that fits and hasn't been moved yet. However, this is `O(n)`, which is not good... But we can use a clever trick here! The key idea is to realize that if we only need to check the right-most file of each size that hasn't been moved yet. Why? Because if the right-most file has size `s` and cannot fit, then neither will fit any other file of size `s`. Using a structure to keep track of the sorted positions of each file by size, along with a structure to keep track of moved files, we just need to choose amongst 10 candidates, one for each possible size... And this is now `O(1)`!
+    -   If there is no file that can fit in that space (either because all of them are too big or because there are no files left to move), then we advance the block position accordingly without updating the checksum, as empty block don't count.
 
 ```js
 function solve(disk) {
-    const filesPosBySize = getFilesPosBySize(disk);
+    const filesBySize = getFilesBySize(disk);
+    const filesUsed = new Set();
 
     let checkSum = 0;
+
     let blockPos = 0;
 
     for (let diskPos = 0; diskPos < disk.length; diskPos++) {
-        if (diskPos % 2 === 0) {
+        if (diskPos % 2 === 0 && !filesUsed.has(diskPos)) {
             const fileId = diskPos / 2;
             const fileSize = disk[diskPos];
 
-            if (filesPosBySize[fileSize].includes(diskPos)) {
-                for (let i = 0; i < fileSize; i++) {
-                    checkSum += blockPos * fileId;
-                    blockPos++;
-                }
-
-                filesPosBySize[fileSize] = filesPosBySize[fileSize].filter(
-                    (pos) => pos !== diskPos
-                );
-            } else {
-                for (let i = 0; i < fileSize; i++) {
-                    blockPos++;
-                }
+            for (let i = 0; i < fileSize; i++) {
+                checkSum += blockPos * fileId;
+                blockPos++;
             }
+
+            filesUsed.add(diskPos);
         } else {
             let emptySize = disk[diskPos];
-            let filePosToMove;
+            let filePosition;
 
             while (
-                (filePosToMove = findFilePosToMove(filesPosBySize, emptySize))
+                (filePosition = findFileToMove(
+                    filesBySize,
+                    filesUsed,
+                    emptySize
+                ))
             ) {
-                const fileId = filePosToMove / 2;
-                const fileSize = disk[filePosToMove];
+                const fileId = filePosition / 2;
+                const fileSize = disk[filePosition];
 
                 for (let i = 0; i < fileSize; i++) {
                     checkSum += blockPos * fileId;
                     blockPos++;
                 }
 
-                filesPosBySize[fileSize].pop();
+                filesBySize[fileSize].pop();
+                filesUsed.add(filePosition);
 
                 emptySize -= fileSize;
             }
@@ -151,35 +161,27 @@ function solve(disk) {
     return checkSum;
 }
 
-function getFilesPosBySize(disk) {
-    const filesPositionBySize = {};
-
-    for (let i = 0; i <= 9; i++) {
-        filesPositionBySize[i] = [];
-    }
+function getFilesBySize(disk) {
+    const filesBySize = Array.from({ length: 10 }, (_) => []);
 
     for (let diskPos = 0; diskPos < disk.length; diskPos += 2) {
-        filesPositionBySize[disk[diskPos]].push(diskPos);
+        filesBySize[disk[diskPos]].push(diskPos);
     }
 
-    return filesPositionBySize;
+    return filesBySize;
 }
 
-function findFilePosToMove(filesPosBySize, emptySize) {
+function findFileToMove(filesBySize, filesUsed, emptySize) {
     let filePosToMove = -Infinity;
 
     for (let i = emptySize; i >= 0; i--) {
-        const filePos = filesPosBySize[i].at(-1);
+        const filePos = filesBySize[i].at(-1);
 
-        if (filePos > filePosToMove) {
+        if (!filesUsed.has(filePos) && filePos > filePosToMove) {
             filePosToMove = filePos;
         }
     }
 
-    if (filePosToMove === -Infinity) {
-        return;
-    }
-
-    return filePosToMove;
+    return filePosToMove === -Infinity ? undefined : filePosToMove;
 }
 ```
